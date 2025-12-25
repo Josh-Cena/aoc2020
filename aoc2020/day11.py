@@ -1,4 +1,6 @@
-def neighbors2d(r: int, c: int, grid: list[list[str]], allowed: list[str] = None) -> list[tuple[int, int]]:
+def neighbors2d(
+    r: int, c: int, grid: list[list[str]], allowed: list[str] = None
+) -> list[tuple[int, int]]:
     res: list[tuple[int, int]] = []
     for dr in range(-1, 2):
         for dc in range(-1, 2):
