@@ -1,23 +1,11 @@
 def find_seat(boarding_pass: str):
-    low = 0
-    high = 128
-    for i in range(7):
-        mid = (low + high) // 2
-        if boarding_pass[i] == "F":
-            high = mid
-        else:
-            low = mid
-    row = low
-    low = 0
-    high = 8
-    for i in range(7, 10):
-        mid = (low + high) // 2
-        if boarding_pass[i] == "L":
-            high = mid
-        else:
-            low = mid
-    col = low
-    return row * 8 + col
+    pass_num = (
+        boarding_pass.replace("F", "0")
+        .replace("B", "1")
+        .replace("L", "0")
+        .replace("R", "1")
+    )
+    return int(pass_num, 2)
 
 
 def solve1(data: list[str]):

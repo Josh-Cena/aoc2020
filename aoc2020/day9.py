@@ -1,18 +1,21 @@
 import itertools
 import numpy as np
 from typing import Union
+from collections import Counter
 
 
 def find_invalid(nums: list[int], preamble_len: int) -> Union[int, None]:
-    sums: set[int] = set(map(sum, itertools.combinations(nums[:preamble_len], 2)))
+    sums = Counter[int]()
+    for pair in itertools.combinations(nums[:preamble_len], 2):
+        sums[sum(pair)] += 1
     for i in range(preamble_len, len(nums)):
         if nums[i] not in sums:
             return nums[i]
-        # Need to construct a new set, because if we do subtraction, we may
-        # remove sums that are still needed in case there are duplicates.
-        sums = set(
-            map(sum, itertools.combinations(nums[i - preamble_len + 1 : i + 1], 2))
-        )
+        for j in range(i - preamble_len + 1, i):
+            pair_sum = nums[i - preamble_len] + nums[j]
+            sums[pair_sum] -= 1
+            pair_sum = nums[i] + nums[j]
+            sums[pair_sum] += 1
     return None
 
 

@@ -1,5 +1,5 @@
 import itertools
-from typing import Callable, Generator, Any
+from typing import Callable, Generator, Any, TypeVar
 
 
 def neighbors3d(point: tuple[int, int, int], include_self: bool):
@@ -18,20 +18,19 @@ def neighbors4d(point: tuple[int, int, int, int], include_self: bool):
         yield (x + dx, y + dy, z + dz, w + dw)
 
 
+Point = TypeVar("Point", bound=tuple[int, ...])
+
+
 def solve(
-    points: set[tuple[int, int, int]],
+    points: set[Point],
     n: int,
-    neighbors: Callable[[tuple[int, ...]], Generator[tuple[int, ...], Any, None]],
+    neighbors: Callable[[Point, bool], Generator[Point, Any, None]],
 ):
     alive = set(points)
     for _ in range(n):
-        new_alive = set()
-        for p in itertools.chain.from_iterable(
-            neighbors(p, include_self=True) for p in alive
-        ):
-            alive_neighbors = sum(
-                np in alive for np in neighbors(p, include_self=False)
-            )
+        new_alive = set[Point]()
+        for p in itertools.chain.from_iterable(neighbors(p, True) for p in alive):
+            alive_neighbors = sum(np in alive for np in neighbors(p, False))
             if p in alive and alive_neighbors == 2 or alive_neighbors == 3:
                 new_alive.add(p)
         alive = new_alive
@@ -39,7 +38,7 @@ def solve(
 
 
 def solve1(data: list[str]):
-    points = set()
+    points = set[tuple[int, int, int]]()
     for i in range(len(data)):
         for j in range(len(data[i])):
             if data[i][j] == "#":
@@ -48,7 +47,7 @@ def solve1(data: list[str]):
 
 
 def solve2(data: list[str]):
-    points = set()
+    points = set[tuple[int, int, int, int]]()
     for i in range(len(data)):
         for j in range(len(data[i])):
             if data[i][j] == "#":

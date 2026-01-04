@@ -1,18 +1,19 @@
-# from tqdm import tqdm
+from tqdm import tqdm
+from typing import Union
 
 
 class Cup:
     label: int
     next: "Cup"
 
-    def __init__(self, label: int, next: "Cup"):
+    def __init__(self, label: int, next: Union["Cup", None] = None):
         self.label = label
-        self.next = next
+        self.next = next if next else self
 
 
 def play(nums: list[int], rounds: int):
     n = len(nums)
-    tail = Cup(nums[-1], None)
+    tail = Cup(nums[-1])
     num_to_cup = {nums[-1]: tail}
     head = tail
     for i in range(n - 2, -1, -1):
@@ -20,7 +21,7 @@ def play(nums: list[int], rounds: int):
         num_to_cup[nums[i]] = head
     tail.next = head
     cur_cup = head
-    for _ in range(rounds):
+    for _ in tqdm(range(rounds)):
         cur_num = cur_cup.label
         dest_num = (cur_num - 1 - 1) % n + 1
         picked_cups = [cur_cup.next, cur_cup.next.next, cur_cup.next.next.next]

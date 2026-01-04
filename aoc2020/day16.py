@@ -9,7 +9,7 @@ def solve1(data: list[str]):
     nearby_tickets = [
         list(map(int, line.split(","))) for line in block3.split("\n")[1:]
     ]
-    invalid_values = []
+    invalid_values: list[int] = []
     for value in itertools.chain.from_iterable(nearby_tickets):
         if all(
             value < min_val or value > max_val for min_val, max_val in joined_ranges
@@ -46,7 +46,7 @@ def solve2(data: list[str]):
                 )
             )
             candidate_fields[i] -= impossible_fields
-    figured_out: set[str] = set()
+    figured_out = set[str]()
     for i, s in sorted(candidate_fields.items(), key=lambda x: len(x[1])):
         s.difference_update(figured_out)
         assert len(s) == 1

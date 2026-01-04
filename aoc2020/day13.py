@@ -17,9 +17,7 @@ def solve1(data: list[str]):
 # where an is the bus id, bn is the index of that bus
 # This is just CRT
 def solve2(data: list[str]):
-    buses = [
-        (int(x), int(x) - i) for (i, x) in enumerate(data[1].split(",")) if x != "x"
-    ]
+    buses = [(int(x), -i) for (i, x) in enumerate(data[1].split(",")) if x != "x"]
     t, m = 0, 1  # t mod 1 == 0
     for a, b in buses:
         # Find t such that t mod a_i == b_i while holding all previous equations
@@ -29,5 +27,4 @@ def solve2(data: list[str]):
         k = ((b - t) * pow(m, -1, a)) % a
         t += m * k
         m *= a
-        t %= m
     print(t)

@@ -1,7 +1,10 @@
+from tqdm import tqdm
+
+
 def solve(nums: list[int], round: int):
     most_recent_turn = {x: i + 1 for i, x in enumerate(nums)}
     last_num = nums[-1]
-    for i in range(len(nums) + 1, round + 1):
+    for i in tqdm(range(len(nums) + 1, round + 1)):
         num = i - 1 - most_recent_turn.get(last_num, i - 1)
         most_recent_turn[last_num] = i - 1
         last_num = num

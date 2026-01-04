@@ -10,6 +10,8 @@ python3.9 -m venv aoc2020-env
 source aoc2020-env/bin/activate
 ```
 
+The only dependencies are `numpy` and `tqdm`.
+
 This repo uses my standard AoC setup. Inputs are stored as `inputs/day{n}/{name}.txt`. By default `name` is `real` (the real question). To run a specific day's solution, use the following command:
 
 ```bash

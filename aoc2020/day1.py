@@ -1,5 +1,5 @@
 def solve1(data: list[str]):
-    seen: set[int] = set()
+    seen = set[int]()
     for line in data:
         num = int(line)
         if 2020 - num in seen:
@@ -9,7 +9,7 @@ def solve1(data: list[str]):
 
 
 def solve2(data: list[str]):
-    seen: set[int] = set()
+    seen = set[int]()
     for line in data:
         num = int(line)
         for e in seen:

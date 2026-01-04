@@ -1,6 +1,7 @@
 import re
+from typing import Callable
 
-required = {
+required: dict[str, Callable[[str], bool]] = {
     "byr": lambda x: 1920 <= int(x) <= 2002,
     "iyr": lambda x: 2010 <= int(x) <= 2020,
     "eyr": lambda x: 2020 <= int(x) <= 2030,
@@ -17,7 +18,7 @@ def solve1(data: list[str]):
     count = 0
     for entry in entries:
         parts = entry.replace("\n", " ").split()
-        fields = {}
+        fields: dict[str, str] = {}
         for part in parts:
             subparts = part.split(":", 1)
             fields[subparts[0]] = subparts[1]
@@ -31,7 +32,7 @@ def solve2(data: list[str]):
     count = 0
     for entry in entries:
         parts = entry.replace("\n", " ").split()
-        fields = {}
+        fields: dict[str, str] = {}
         for part in parts:
             subparts = part.split(":", 1)
             if subparts[0] in fields:

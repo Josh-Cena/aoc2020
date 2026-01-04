@@ -39,7 +39,7 @@ def solve1(data: list[str]):
 def solve2(data: list[str]):
     black = init_grid(data)
     for _ in range(100):
-        new_black = set()
+        new_black = set[tuple[int, int]]()
         for p in itertools.chain.from_iterable(
             neighbors_hex(p, include_self=True) for p in black
         ):

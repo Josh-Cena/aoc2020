@@ -3,7 +3,7 @@ import itertools
 
 
 def solve1(data: list[str]):
-    mem = {}
+    mem: dict[int, int] = {}
     mask_1 = 0  # 0 bit => unchanged; 1 bit => force to 1
     mask_0 = -1 & 0xFFFFFFFFF  # 0 bit => force to 0; 1 bit => unchanged
     for line in data:
@@ -37,14 +37,14 @@ def generate_binaries(x_indices: list[int]):
 
 
 def solve2(data: list[str]):
-    mem = {}
+    mem: dict[int, int] = {}
     mask_1 = 0
     x_masks = []
     for line in data:
         if line.startswith("mask = "):
             mask = reversed(line[len("mask = ") :])
             mask_1 = 0
-            x_indices = []
+            x_indices: list[int] = []
             for i, ch in enumerate(mask):
                 if ch == "1":
                     mask_1 = mask_1 ^ (1 << i)

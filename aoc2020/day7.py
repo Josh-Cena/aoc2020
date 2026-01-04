@@ -1,3 +1,6 @@
+from collections import defaultdict
+
+
 def parse_line(line: str):
     parent, children = line.split(" contain ")
     parent = parent.split(" bag")[0]
@@ -14,21 +17,26 @@ def parse_line(line: str):
 
 def solve1(data: list[str]):
     graph = {parent: children for parent, children in map(parse_line, data)}
+    rev_graph: defaultdict[str, list[str]] = defaultdict(list)
+    for parent, children in graph.items():
+        for _, child in children:
+            rev_graph[child].append(parent)
 
-    def dfs(node: str) -> bool:
-        if node == "shiny gold":
-            return True
-        return any(dfs(child) for _, child in graph[node])
-
-    print(sum(dfs(parent) for parent in graph if parent != "shiny gold"))
+    seen = set[str]()
+    stack = ["shiny gold"]
+    while stack:
+        node = stack.pop()
+        for neighbor in rev_graph[node]:
+            if neighbor not in seen:
+                seen.add(neighbor)
+                stack.append(neighbor)
+    print(len(seen))
 
 
 def solve2(data: list[str]):
     graph = {parent: children for parent, children in map(parse_line, data)}
 
     def dfs(node: str) -> int:
-        if not graph[node]:
-            return 0
-        return sum(count + count * dfs(child) for count, child in graph[node])
+        return sum(count * (1 + dfs(child)) for count, child in graph[node])
 
     print(dfs("shiny gold"))

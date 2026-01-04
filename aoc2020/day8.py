@@ -1,6 +1,6 @@
 def exec_until_loop(data: list[str]):
     line_num = 0
-    seen: set[int] = set()
+    seen = set[int]()
     acc = 0
     while line_num not in seen and line_num < len(data):
         seen.add(line_num)

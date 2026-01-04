@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Union
 import itertools
 
 
@@ -29,7 +29,7 @@ def matches_rule(
     inp: str,
     ind: int,
     id: int,
-    rules: dict[int, list[list[int]] | Literal['"a"', '"b"']],
+    rules: dict[int, Union[list[list[int]], Literal['"a"', '"b"']]],
 ) -> list[int]:
     if ind >= len(inp):
         return []
@@ -38,7 +38,7 @@ def matches_rule(
         return [ind + 1] if inp[ind] == "a" else []
     if rule == '"b"':
         return [ind + 1] if inp[ind] == "b" else []
-    end_inds = []
+    end_inds: list[int] = []
     for alternative in rule:
         possible_inds = [ind]
         for part in alternative:
