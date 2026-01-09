@@ -1,7 +1,8 @@
 # Advent of Code 2020
 
-Language: ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) (3.9)
-Package Manager: [pip](https://pypi.org/project/pip/) with [venv](https://docs.python.org/3/library/venv.html)
+- Language: ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) (3.9)
+- Package Manager: [pip](https://pypi.org/project/pip/) with [venv](https://docs.python.org/3/library/venv.html)
+- [Writeup](https://joshcena.com/notes/aoc/)
 
 You first need to start the virtual environment:
 
